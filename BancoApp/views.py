@@ -49,14 +49,14 @@ def vaultsApi(request, id = 0):
         return JsonResponse("Algo ha salido mal", safe = False)
     elif request.method=="PUT":
         vaults_data = JSONParser().parse(request)
-        vaults = Vaults.objects.get(vaults_id = vaults_data['vaults_id'])
+        vaults = Vaults.objects.get(vaults_id = vaults_data['vault_id'])
         vaults_serializer = VaultsSerializer(vaults, data = vaults_data)
         if vaults_serializer.is_valid():
             vaults_serializer.save()
             return JsonResponse("Se ha actualizado el registro correctamente.", safe = False)
         return JsonResponse("Algo ha salido mal", safe = False)
     elif request.method=="DELETE":
-        vaults = Vaults.objects.get(vaults_id = id)
+        vaults = Vaults.objects.get(vault_id = id)
         vaults.delete()
         return JsonResponse("Se ha borrado exitosamente", safe = False)
     
