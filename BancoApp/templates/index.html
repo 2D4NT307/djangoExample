@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+
+{% block content %}
+  <h1><strong>Banco Dudoso</strong> | Home</h1>
+  <p>¡Bienvenido a Banco Dudoso, un banco en el que definitivamente <em>no debería de confiar!</em></p>
+  <h2>Contenido</h2>
+  <p>El banco cuenta con la siguiente cantidad de registros:</p>
+  <ul>
+    <li><strong>Clients:</strong> {{ num_clients }}</li>
+    <li><strong>Vaults:</strong> {{ num_vaults }}</li>
+    <li><strong>Boxes:</strong> {{ num_boxes }}</li>
+  </ul>
+{% endblock %}
+

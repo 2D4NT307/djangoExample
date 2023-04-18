@@ -8,6 +8,18 @@ from BancoApp.serializers import ClientsSerializer, VaultsSerializer, BoxesSeria
 
 # Create your views here.
 
+def index(request):
+    num_clients = Client.objects.all().count()
+    num_vaults = Vault.objects.all().count()
+    num_boxes = Box.objects.all().count()
+
+    context = {
+        'num_clients': num_clients,
+        'num_vaults': num_vaults,
+        'num_boxes': num_boxes,
+    }
+    return render(request, 'index.html', context = context)
+
 @csrf_exempt
 def clientApi(request, id = 0):
     if request.method=="GET":
