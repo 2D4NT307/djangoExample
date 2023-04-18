@@ -3,86 +3,86 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 
-from BancoApp.models import Clients, Vaults, Boxes
+from BancoApp.models import Client, Vault, Box
 from BancoApp.serializers import ClientsSerializer, VaultsSerializer, BoxesSerializer
 
 # Create your views here.
 
 @csrf_exempt
-def clientsApi(request, id = 0):
+def clientApi(request, id = 0):
     if request.method=="GET":
-        clients = Clients.objects.all()
-        clients_serializer = ClientsSerializer(clients, many = True)
-        return JsonResponse(clients_serializer.data, safe = False)
+        client = Client.objects.all()
+        client_serializer = ClientsSerializer(client, many = True)
+        return JsonResponse(client_serializer.data, safe = False)
     elif request.method=="POST":
-        clients_data = JSONParser().parse(request)
-        clients_serializer = ClientsSerializer(data = clients_data)
-        if clients_serializer.is_valid():
-            clients_serializer.save()
+        client_data = JSONParser().parse(request)
+        client_serializer = ClientsSerializer(data = client_data)
+        if client_serializer.is_valid():
+            client_serializer.save()
             return JsonResponse("Se ha añadido el registro correctamente.", safe = True)
         return JsonResponse("Algo ha salido mal", safe = False)
     elif request.method=="PUT":
-        clients_data = JSONParser().parse(request)
-        clients = Clients.objects.get(client_id = clients_data['client_id'])
-        clients_serializer = ClientsSerializer(clients, data = clients_data)
-        if clients_serializer.is_valid():
-            clients_serializer.save()
+        client_data = JSONParser().parse(request)
+        client = Client.objects.get(client_id = client_data['client_id'])
+        client_serializer = ClientsSerializer(client, data = client_data)
+        if client_serializer.is_valid():
+            client_serializer.save()
             return JsonResponse("Se ha actualizado el registro correctamente.", safe = True)
         return JsonResponse("Algo ha salido mal", safe = False)
     elif request.method=="DELETE":
-        clients = Clients.objects.get(clients_id = id)
-        clients.delete()
+        client = Client.objects.get(clients_id = id)
+        client.delete()
         return JsonResponse("Se ha borrado exitosamente", safe = False)
     
 @csrf_exempt
-def vaultsApi(request, id = 0):
+def vaultApi(request, id = 0):
     if request.method=="GET":
-        vaults = Vaults.objects.all()
-        vaults_serializer = VaultsSerializer(vaults, many = True)
-        return JsonResponse(vaults_serializer.data, safe = False)
+        vault = Vault.objects.all()
+        vault_serializer = VaultsSerializer(vault, many = True)
+        return JsonResponse(vault_serializer.data, safe = False)
     elif request.method=="POST":
-        vaults_data = JSONParser().parse(request)
-        vaults_serializer = VaultsSerializer(data = vaults_data)
-        if vaults_serializer.is_valid():
-            vaults_serializer.save()
+        vault_data = JSONParser().parse(request)
+        vault_serializer = VaultsSerializer(data = vault_data)
+        if vault_serializer.is_valid():
+            vault_serializer.save()
             return JsonResponse("Se ha añadido el registro correctamente.", safe = False)
         return JsonResponse("Algo ha salido mal", safe = False)
     elif request.method=="PUT":
-        vaults_data = JSONParser().parse(request)
-        vaults = Vaults.objects.get(vaults_id = vaults_data['vault_id'])
-        vaults_serializer = VaultsSerializer(vaults, data = vaults_data)
-        if vaults_serializer.is_valid():
-            vaults_serializer.save()
+        vault_data = JSONParser().parse(request)
+        vault = Vault.objects.get(vaults_id = vault_data['vault_id'])
+        vault_serializer = VaultsSerializer(vault, data = vault_data)
+        if vault_serializer.is_valid():
+            vault_serializer.save()
             return JsonResponse("Se ha actualizado el registro correctamente.", safe = False)
         return JsonResponse("Algo ha salido mal", safe = False)
     elif request.method=="DELETE":
-        vaults = Vaults.objects.get(vault_id = id)
-        vaults.delete()
+        vault = Vault.objects.get(vault_id = id)
+        vault.delete()
         return JsonResponse("Se ha borrado exitosamente", safe = False)
     
 @csrf_exempt
-def boxesApi(request, id = 0):
+def boxApi(request, id = 0):
     if request.method=="GET":
-        boxes = Boxes.objects.all()
-        boxes_serializer = BoxesSerializer(boxes, many = True)
-        return JsonResponse(boxes_serializer.data, safe = False)
+        box = Box.objects.all()
+        box_serializer = BoxesSerializer(box, many = True)
+        return JsonResponse(box_serializer.data, safe = False)
     elif request.method=="POST":
-        boxes_data = JSONParser().parse(request)
-        boxes_serializer = VaultsSerializer(data = boxes_data)
-        if boxes_serializer.is_valid():
-            boxes_serializer.save()
+        box_data = JSONParser().parse(request)
+        box_serializer = VaultsSerializer(data = box_data)
+        if box_serializer.is_valid():
+            box_serializer.save()
             return JsonResponse("Se ha añadido el registro correctamente.", safe = False)
         return JsonResponse("Algo ha salido mal", safe = False)
     elif request.method=="PUT":
-        boxes_data = JSONParser().parse(request)
-        boxes = Vaults.objects.get(boxes_id = boxes_data['boxes_id'])
-        boxes_serializer = BoxesSerializer(boxes, data = boxes_data)
-        if boxes_serializer.is_valid():
-            boxes_serializer.save()
+        box_data = JSONParser().parse(request)
+        box = Vault.objects.get(boxes_id = box_data['boxes_id'])
+        box_serializer = BoxesSerializer(box, data = box_data)
+        if box_serializer.is_valid():
+            box_serializer.save()
             return JsonResponse("Se ha actualizado el registro correctamente.", safe = False)
         return JsonResponse("Algo ha salido mal", safe = False)
     elif request.method=="DELETE":
-        boxes = Boxes.objects.get(boxes_id = id)
-        boxes.delete()
+        box = Box.objects.get(boxes_id = id)
+        box.delete()
         return JsonResponse("Se ha borrado exitosamente", safe = False)
     
