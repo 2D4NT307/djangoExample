@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Title: {{ client.name }}</h1>
+
+  <p><strong>DUI:</strong> <a href="">{{ client.dui }}</a></p> <!-- author detail link not yet defined -->
+  <p><strong>Name:</strong> {{ client.name }}</p>
+  <p><strong>Datebirth:</strong> {{ client.datebirth }}</p>
+{% endblock %}

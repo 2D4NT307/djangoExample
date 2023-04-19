@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
+from django.views import generic
 
 from BancoApp.models import Client, Vault, Box
 from BancoApp.serializers import ClientsSerializer, VaultsSerializer, BoxesSerializer
@@ -19,6 +20,27 @@ def index(request):
         'num_boxes': num_boxes,
     }
     return render(request, 'index.html', context = context)
+
+class ClientsListView(generic.ListView):
+    model = Client
+    context_object_name = 'client_list'
+    queryset = Client.objects.all()
+    template_name = 'client_list.html'
+
+class ClientDetailView(generic.DetailView):
+    model = Client
+
+class VaultsListView(generic.ListView):
+    model = Vault
+    context_object_name = 'vault_list'
+    queryset = Vault.objects.all()
+    template_name = 'vault_list'
+
+class BoxesListView(generic.ListView):
+    model = Box
+    context_object_name = 'box_list'
+    queryset = Box.objects.all()
+    template_name = 'box_list'
 
 @csrf_exempt
 def clientApi(request, id = 0):

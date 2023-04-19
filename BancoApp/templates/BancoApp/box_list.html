@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1><strong>Boxes</strong></h1>
+  {% if box_list %}
+  <ul>
+    {% for box in box_list %}
+      <li>
+        ({{box.box_vault}})<a href="{{ box.get_absolute_url }}">{{ box.box_serial_number }}</a> | Owner: {{box.box_owner}}
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>No hay clientes registrados.</p>
+  {% endif %}
+{% endblock %}

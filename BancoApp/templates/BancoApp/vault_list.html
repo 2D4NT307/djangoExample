@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1><strong>Vaults</strong></h1>
+  {% if vault_list %}
+  <ul>
+    {% for vault in vault_list %}
+      <li>
+        <a href="{{ vault.get_absolute_url }}">{{ vault.vault_serial_number }}</a>: {{vault.vault_number_of_boxes}} boxes
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>No hay clientes registrados.</p>
+  {% endif %}
+{% endblock %}

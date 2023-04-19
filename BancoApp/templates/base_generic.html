@@ -16,9 +16,9 @@
       {% block sidebar %}
         <ul class="sidebar-nav">
           <li><a href="{% url 'index' %}">Home</a></li>
-          <li><a href="">All clients</a></li>
-          <li><a href="">All vaults</a></li>
-          <li><a href="">All boxes</a></li>
+          <li><a href="{% url 'clients' %}">All clients</a></li>
+          <li><a href="{% url 'vaults' %}">All vaults</a></li>
+          <li><a href="{% url 'boxes' %}">All boxes</a></li>
         </ul>
      {% endblock %}
       </div>
