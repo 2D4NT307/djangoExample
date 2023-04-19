@@ -1,0 +1,8 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Serial Number: <strong>{{ box.box_serial_number }}</strong></h1>
+
+  <p><strong>Parent vault:</strong> <a href="{{ box.box_vault.get_absolute_url }}">{{ box.box_vault }}</a></p>
+  <p><strong>Owner:</strong> <a href="{{ box.box_owner.get_absolute_url }}">{{ box.box_owner }}</a></p>
+{% endblock %}

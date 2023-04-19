@@ -36,11 +36,17 @@ class VaultsListView(generic.ListView):
     queryset = Vault.objects.all()
     template_name = 'vault_list'
 
+class VaultDetailView(generic.DetailView):
+    model = Vault
+
 class BoxesListView(generic.ListView):
     model = Box
     context_object_name = 'box_list'
     queryset = Box.objects.all()
     template_name = 'box_list'
+
+class BoxDetailView(generic.DetailView):
+    model = Box
 
 @csrf_exempt
 def clientApi(request, id = 0):

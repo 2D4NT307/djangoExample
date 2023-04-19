@@ -11,6 +11,8 @@ class Client(models.Model):
         ordering = ['client_dui']
     def __str__(self):
         return f'{self.client_dui} ({self.client_name})'
+    def get_absolute_url(self):
+        return reverse('client-detail', args=[str(self.client_dui)])
 
 class Vault(models.Model):
     vault_id = models.AutoField(primary_key=True)
@@ -20,6 +22,8 @@ class Vault(models.Model):
         ordering = ['vault_serial_number']
     def __str__(self):
         return self.vault_serial_number
+    def get_absolute_url(self):
+        return reverse('vault-detail', args=[str(self.vault_id)])
 
 class Box(models.Model):
     box_id = models.AutoField(primary_key=True)
@@ -30,3 +34,5 @@ class Box(models.Model):
         ordering = ['box_serial_number']
     def __str__(self):
         return self.box_serial_number
+    def get_absolute_url(self):
+        return reverse('box-detail', args=[str(self.box_id)])
