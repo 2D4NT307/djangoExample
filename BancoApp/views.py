@@ -21,6 +21,8 @@ def index(request):
     }
     return render(request, 'index.html', context = context)
 
+
+#Página web para clientes
 class ClientsListView(generic.ListView):
     model = Client
     context_object_name = 'client_list'
@@ -48,8 +50,9 @@ class BoxesListView(generic.ListView):
 class BoxDetailView(generic.DetailView):
     model = Box
 
+#API CRUD en el caso de querer poder consultar y agregar registros (no segura)
 @csrf_exempt
-def clientApi(request, id = 0):
+def clientApi(request, dui = ""):
     if request.method=="GET":
         client = Client.objects.all()
         client_serializer = ClientsSerializer(client, many = True)
@@ -63,14 +66,14 @@ def clientApi(request, id = 0):
         return JsonResponse("Algo ha salido mal", safe = False)
     elif request.method=="PUT":
         client_data = JSONParser().parse(request)
-        client = Client.objects.get(client_id = client_data['client_id'])
+        client = Client.objects.get(client_dui = client_data['client_dui'])
         client_serializer = ClientsSerializer(client, data = client_data)
         if client_serializer.is_valid():
             client_serializer.save()
             return JsonResponse("Se ha actualizado el registro correctamente.", safe = True)
         return JsonResponse("Algo ha salido mal", safe = False)
     elif request.method=="DELETE":
-        client = Client.objects.get(clients_id = id)
+        client = Client.objects.get(clients_dui = dui)
         client.delete()
         return JsonResponse("Se ha borrado exitosamente", safe = False)
     
